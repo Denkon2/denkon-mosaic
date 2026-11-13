@@ -23,10 +23,9 @@ Features:
 * Theme controls for the colour scheme, content width, header, footer and typography.
 * English and Russian interface choice in the theme settings.
 * Block patterns for hero sections, benefits, stages, FAQs, galleries, partner logos, testimonials, company information and contact forms.
-* Safe administrator-only SVG upload sanitization.
 * Compatible with child themes.
 
-The theme does not connect to external services, collect analytics, create user accounts or send site data to third parties. All theme code and bundled placeholder SVG assets are original Denkon assets and are distributed under GPLv2 or later.
+The theme does not connect to external services, collect analytics, create user accounts or send site data to third parties. All theme code and bundled placeholder SVG assets are original Denkon assets and are distributed under GPLv2 or later. SVG upload support is intentionally not included; use a dedicated security plugin if that capability is needed.
 
 == Installation ==
 

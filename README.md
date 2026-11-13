@@ -13,9 +13,10 @@
 - Primary and footer menu locations.
 - Appearance settings for colour scheme, content width, header, footer and typography.
 - English and Russian interface option in the theme settings.
-- Safe administrator-only SVG upload sanitization.
 - Child-theme friendly, with a built-in child-theme creation tool.
 - No external services, tracking, user accounts or third-party data transfer.
+
+SVG upload support is intentionally not included in the theme. If a project needs SVG uploads, use a dedicated security plugin.
 
 ## Requirements
 

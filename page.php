@@ -16,7 +16,10 @@ $denkon_mosaic_has_pattern = denkon_mosaic_page_has_theme_pattern();
 			<?php if ( ! $denkon_mosaic_has_pattern ) : ?>
 				<h1 class="mosaic-page__title"><?php the_title(); ?></h1>
 			<?php endif; ?>
-			<div class="mosaic-page__content"><?php the_content(); ?></div>
+			<div class="mosaic-page__content">
+				<?php the_content(); ?>
+				<?php wp_link_pages(); ?>
+			</div>
 		</article>
 		<?php if ( comments_open() || get_comments_number() ) : ?>
 			<?php comments_template(); ?>

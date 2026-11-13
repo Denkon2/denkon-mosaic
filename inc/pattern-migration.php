@@ -229,9 +229,10 @@ function denkon_mosaic_handle_pattern_metadata_migration() {
 	check_admin_referer( 'denkon_mosaic_migrate_pattern_metadata' );
 
 	$result  = denkon_mosaic_migrate_existing_pattern_metadata();
+	$updated = absint( $result['updated'] );
 	$message = sprintf(
-		_n( 'Метаданные обновлены в %1$d документе: распознана %2$d секция.', 'Метаданные обновлены в %1$d документах: распознано %2$d секций.', $result['updated'], 'denkon-mosaic' ),
-		$result['updated'],
+		_n( 'Метаданные обновлены в %1$d документе: распознана %2$d секция.', 'Метаданные обновлены в %1$d документах: распознано %2$d секций.', $updated, 'denkon-mosaic' ),
+		$updated,
 		$result['patterns']
 	);
 

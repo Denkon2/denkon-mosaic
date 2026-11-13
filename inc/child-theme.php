@@ -224,6 +224,13 @@ function denkon_mosaic_create_child_theme_files() {
 		}
 	}
 
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	global $wp_filesystem;
+
+	if ( ! WP_Filesystem() ) {
+		return new WP_Error( 'denkon_mosaic_child_theme_filesystem_failed', __( 'Не удалось получить доступ к файловой системе WordPress.', 'denkon-mosaic' ) );
+	}
+
 	$style_header  = "/*\n";
 	$style_header .= "Theme Name: Denkon Mosaic Child\n";
 	$style_header .= "Template: denkon-mosaic\n";
@@ -261,14 +268,14 @@ function denkon_mosaic_create_child_theme_files() {
 	);
 
 	foreach ( $files as $path => $contents ) {
-		if ( false === file_put_contents( $path, $contents ) ) {
+		if ( ! $wp_filesystem->put_contents( $path, $contents, FS_CHMOD_FILE ) ) {
 			return new WP_Error( 'denkon_mosaic_child_theme_file_failed', __( 'Не удалось записать файлы дочерней темы.', 'denkon-mosaic' ) );
 		}
 	}
 
 	$screenshot_source = denkon_mosaic_get_child_theme_screenshot_source();
 
-	if ( $screenshot_source && ! copy( $screenshot_source, trailingslashit( $child_dir ) . 'screenshot.png' ) ) {
+	if ( $screenshot_source && ! $wp_filesystem->copy( $screenshot_source, trailingslashit( $child_dir ) . 'screenshot.png', true, FS_CHMOD_FILE ) ) {
 		return new WP_Error( 'denkon_mosaic_child_theme_screenshot_failed', __( 'Не удалось скопировать превью дочерней темы.', 'denkon-mosaic' ) );
 	}
 

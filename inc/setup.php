@@ -18,11 +18,19 @@ function denkon_mosaic_setup() {
 	load_theme_textdomain( 'denkon-mosaic', get_template_directory() . '/languages' );
 
 	add_theme_support( 'title-tag' );
+	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'editor-styles' );
+	add_editor_style( 'assets/css/main.css' );
+	add_theme_support(
+		'custom-background',
+		array(
+			'default-color' => 'f8f6f2',
+		)
+	);
 	add_theme_support( 'custom-logo', array(
 		'height'      => 80,
 		'width'       => 320,

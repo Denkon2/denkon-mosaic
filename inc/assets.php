@@ -111,6 +111,10 @@ function denkon_mosaic_enqueue_assets() {
 
 	wp_enqueue_script( 'denkon-mosaic-main', $uri . '/assets/js/main.js', array(), $theme->get( 'Version' ), true );
 
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+
 	/**
 	 * Fires after the Free theme assets have been enqueued on the front end.
 	 */

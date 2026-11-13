@@ -14,6 +14,22 @@ add_action( 'admin_post_denkon_mosaic_import_settings', 'denkon_mosaic_handle_im
 add_action( 'admin_post_denkon_mosaic_reset_settings', 'denkon_mosaic_handle_reset_settings' );
 
 /**
+ * Gets the WordPress filesystem abstraction for transfer operations.
+ *
+ * @return WP_Filesystem_Base|false
+ */
+function denkon_mosaic_get_settings_transfer_filesystem() {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	global $wp_filesystem;
+
+	if ( ! WP_Filesystem() ) {
+		return false;
+	}
+
+	return $wp_filesystem;
+}
+
+/**
  * Gets the per-user transient key used for transfer notices.
  *
  * @return string
@@ -150,7 +166,7 @@ function denkon_mosaic_get_settings_transfer_manifest() {
 		'version'     => 1,
 		'theme'       => 'denkon-mosaic',
 		'exported_at' => gmdate( 'c' ),
-		'site_url'    => home_url( '/' ),
+		'origin'      => home_url( '/' ),
 		'settings'    => $settings,
 		'media'       => $media,
 	);
@@ -220,11 +236,21 @@ function denkon_mosaic_handle_export_settings() {
 		exit;
 	}
 
+	$filesystem = denkon_mosaic_get_settings_transfer_filesystem();
+	$contents   = $filesystem ? $filesystem->get_contents( $temp_file ) : false;
+
+	if ( false === $contents ) {
+		wp_delete_file( $temp_file );
+		denkon_mosaic_set_settings_transfer_notice( 'error', __( 'Не удалось прочитать файл с настройками. Попробуйте ещё раз.', 'denkon-mosaic' ) );
+		wp_safe_redirect( denkon_mosaic_get_settings_transfer_url() );
+		exit;
+	}
+
 	nocache_headers();
 	header( 'Content-Type: application/zip' );
 	header( 'Content-Disposition: attachment; filename="denkon-mosaic-settings-' . gmdate( 'Y-m-d-His' ) . '.zip"' );
 	header( 'Content-Length: ' . filesize( $temp_file ) );
-	readfile( $temp_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
+	echo $contents; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary ZIP response.
 	wp_delete_file( $temp_file );
 	exit;
 }
@@ -256,9 +282,10 @@ function denkon_mosaic_import_settings_transfer_media( $zip, $media_item ) {
 	}
 
 	$filename = ! empty( $media_item['filename'] ) ? sanitize_file_name( $media_item['filename'] ) : wp_basename( $path );
-	$temp     = wp_tempnam( $filename );
+	$temp       = wp_tempnam( $filename );
+	$filesystem = denkon_mosaic_get_settings_transfer_filesystem();
 
-	if ( ! $temp || false === file_put_contents( $temp, $contents ) ) {
+	if ( ! $temp || ! $filesystem || ! $filesystem->put_contents( $temp, $contents, FS_CHMOD_FILE ) ) {
 		return 0;
 	}
 
@@ -268,15 +295,6 @@ function denkon_mosaic_import_settings_transfer_media( $zip, $media_item ) {
 		'error'    => 0,
 		'size'     => strlen( $contents ),
 	);
-
-	if ( 'svg' === strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) ) ) {
-		$file = denkon_mosaic_sanitize_svg_upload( $file );
-
-		if ( ! empty( $file['error'] ) ) {
-			wp_delete_file( $temp );
-			return 0;
-		}
-	}
 
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';

@@ -13,7 +13,11 @@ get_header();
 		<article id="post-<?php the_ID(); ?>" <?php post_class( 'mosaic-page' ); ?>>
 			<?php the_title( '<h1 class="mosaic-page__title">', '</h1>' ); ?>
 			<div class="mosaic-entry__meta"><?php echo esc_html( get_the_date() ); ?></div>
-			<div class="mosaic-page__content"><?php the_content(); ?></div>
+			<div class="mosaic-page__content">
+				<?php the_content(); ?>
+				<?php wp_link_pages(); ?>
+			</div>
+			<?php the_tags( '<div class="mosaic-entry__tags">', ', ', '</div>' ); ?>
 		</article>
 		<?php the_post_navigation(); ?>
 		<?php if ( comments_open() || get_comments_number() ) : ?>
