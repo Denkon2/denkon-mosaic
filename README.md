@@ -1,0 +1,2 @@
+# denkon-mosaic
+Wordpress theme
