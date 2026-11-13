@@ -1,0 +1,300 @@
+// main: "../main.less"
+
+// Styles for patterns that are registered only when the Denkon Mosaic Pro
+// plugin is active. Keeping them in the theme preserves the public design
+// tokens and lets a child theme override them in one place.
+.mosaic-pro-cta__inner {
+    padding: clamp(34px, 6vw, 72px);
+    border-radius: calc(var(--mosaic-radius) * 2);
+    color: #fff;
+    background: var(--mosaic-color-primary);
+}
+
+.mosaic-pro-cta__content {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mosaic-pro-cta__content h2,
+.mosaic-pro-cta__content p {
+    color: inherit;
+}
+
+.mosaic-pro-cta__content h2 {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 50px);
+    line-height: 1.08;
+}
+
+.mosaic-pro-cta__content p {
+    max-width: 600px;
+    margin: 18px auto 0;
+    opacity: .9;
+    line-height: 1.65;
+}
+
+.mosaic-pro-cta__content .wp-block-buttons {
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.mosaic-pro-cta__content .wp-block-button__link {
+    color: var(--mosaic-color-primary) !important;
+    background: #fff !important;
+}
+
+.mosaic-pro-cta__content .is-style-outline .wp-block-button__link {
+    border-color: rgba(255, 255, 255, .78) !important;
+    color: #fff !important;
+    background: transparent !important;
+}
+
+.mosaic-pro-stat__number {
+    margin: 0 !important;
+    color: var(--mosaic-color-primary) !important;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 750;
+    letter-spacing: -.05em;
+    line-height: 1;
+}
+
+.mosaic-pro-stat__label {
+    margin-top: 14px !important;
+    color: var(--mosaic-color-text) !important;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45 !important;
+}
+
+.mosaic-pro-stat--counter {
+    text-align: center;
+}
+
+.mosaic-pro-stat__counter {
+    display: flex;
+    width: min(150px, 100%);
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 14px;
+    border: 1px solid var(--mosaic-color-primary);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--mosaic-color-primary) 7%, transparent);
+}
+
+.mosaic-pro-stat--counter .mosaic-pro-stat__label {
+    max-width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mosaic-pro-cta--with-image .mosaic-pro-cta__columns {
+    gap: clamp(28px, 6vw, 84px);
+}
+
+.mosaic-pro-cta--with-image .mosaic-pro-cta__content {
+    max-width: none;
+    text-align: left;
+}
+
+.mosaic-pro-cta--with-image .mosaic-pro-cta__content .mosaic-section__eyebrow {
+    color: inherit;
+    opacity: .75;
+}
+
+.mosaic-pro-cta--with-image .mosaic-pro-cta__content p {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.mosaic-pro-cta--with-image .mosaic-pro-cta__content .wp-block-buttons {
+    justify-content: flex-start;
+}
+
+.mosaic-pro-cta__media {
+    height: 100%;
+    min-height: 300px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: calc(var(--mosaic-radius) * 1.5);
+}
+
+.mosaic-pro-cta__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mosaic-pro-case__inner {
+    padding: clamp(22px, 4vw, 46px);
+    border: 1px solid var(--mosaic-color-border);
+    border-radius: calc(var(--mosaic-radius) * 2);
+    background: var(--mosaic-color-surface);
+}
+
+.mosaic-pro-case__columns {
+    gap: clamp(28px, 6vw, 82px);
+}
+
+.mosaic-pro-case__columns > .wp-block-column {
+    min-width: 0;
+}
+
+.mosaic-pro-case__content h2 {
+    margin: 12px 0 18px;
+    color: var(--mosaic-color-text);
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.1;
+}
+
+.mosaic-pro-case__content > p:not(.mosaic-section__eyebrow) {
+    color: var(--mosaic-color-muted);
+    line-height: 1.65;
+}
+
+.mosaic-pro-case__result {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--mosaic-color-primary);
+    background: color-mix(in srgb, var(--mosaic-color-primary) 8%, transparent);
+}
+
+.mosaic-pro-case__result p {
+    margin: 0;
+    color: var(--mosaic-color-text);
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.mosaic-pro-case__media {
+    height: 100%;
+    min-height: 320px;
+    overflow: hidden;
+    border-radius: calc(var(--mosaic-radius) * 1.5);
+}
+
+.mosaic-pro-case__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mosaic-pro-layout-header__inner {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    gap: 28px;
+}
+
+.mosaic-pro-layout-header .wp-block-site-logo {
+    flex: 0 0 auto;
+}
+
+.mosaic-pro-layout-header .custom-logo {
+    display: block;
+    width: auto;
+    max-width: 180px;
+    height: auto;
+}
+
+.mosaic-pro-layout-header .wp-block-navigation {
+    flex: 1;
+    justify-content: center;
+}
+
+.mosaic-pro-layout-header .wp-block-navigation a {
+    color: var(--mosaic-header-link, var(--mosaic-color-text));
+}
+
+.mosaic-pro-layout-header .wp-block-navigation a:hover,
+.mosaic-pro-layout-header .wp-block-navigation a:focus {
+    color: var(--mosaic-header-link-hover, var(--mosaic-color-primary));
+}
+
+.mosaic-pro-layout-footer__inner {
+    padding-top: 42px;
+    padding-bottom: 32px;
+}
+
+.mosaic-pro-layout-footer__columns {
+    gap: clamp(28px, 6vw, 84px);
+}
+
+.mosaic-pro-layout-footer .wp-block-site-logo .custom-logo {
+    display: block;
+    width: auto;
+    max-width: 190px;
+    height: auto;
+}
+
+.mosaic-pro-layout-footer p,
+.mosaic-pro-layout-footer h3,
+.mosaic-pro-layout-footer .wp-block-navigation a {
+    color: var(--mosaic-footer-text, var(--mosaic-color-text));
+}
+
+.mosaic-pro-layout-footer .wp-block-navigation a:hover,
+.mosaic-pro-layout-footer .wp-block-navigation a:focus {
+    color: var(--mosaic-footer-link-hover, var(--mosaic-color-primary));
+}
+
+.mosaic-pro-layout-footer__copyright {
+    margin-bottom: 0;
+    color: var(--mosaic-footer-text, var(--mosaic-color-muted)) !important;
+    font-size: 14px;
+}
+
+.mosaic-pro-layout-footer__development {
+    margin-top: 6px;
+    margin-bottom: 0;
+    font-size: 12px;
+}
+
+.mosaic-pro-layout-footer__development a {
+    color: var(--mosaic-footer-link, var(--mosaic-color-text));
+    text-decoration: none;
+}
+
+.mosaic-pro-layout-footer__development a:hover,
+.mosaic-pro-layout-footer__development a:focus {
+    color: var(--mosaic-footer-link-hover, var(--mosaic-color-primary));
+}
+
+@media (max-width: 760px) {
+    .mosaic-pro-case__media {
+        min-height: 260px;
+    }
+
+    .mosaic-pro-cta--with-image .mosaic-pro-cta__content {
+        text-align: center;
+    }
+
+    .mosaic-pro-cta--with-image .mosaic-pro-cta__content p {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .mosaic-pro-cta--with-image .mosaic-pro-cta__content .wp-block-buttons {
+        justify-content: center;
+    }
+
+    .mosaic-pro-cta__media {
+        min-height: 230px;
+    }
+
+    .mosaic-pro-layout-header__inner {
+        min-height: 68px;
+        gap: 16px;
+    }
+
+    .mosaic-pro-layout-header .wp-block-navigation {
+        flex: 0 0 auto;
+    }
+
+    .mosaic-pro-layout-header .wp-block-buttons {
+        display: none;
+    }
+}
