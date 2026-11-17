@@ -233,15 +233,19 @@ a {
 .site-header__nav a:focus {
     color: var(--mosaic-header-link-hover, var(--mosaic-color-primary));
 }
-.current-menu-item a{
+.current-menu-item a,
+.current_page_item > a,
+.current_page_ancestor > a {
     color: var(--mosaic-color-primary);
 }
 
-.site-header__nav .menu-item-has-children {
+.site-header__nav .menu-item-has-children,
+.site-header__nav .page_item_has_children {
     position: relative;
 }
 
-.site-header__nav .sub-menu {
+.site-header__nav .sub-menu,
+.site-header__nav .children {
     position: absolute;
     z-index: 20;
     top: 100%;
@@ -266,7 +270,16 @@ a {
     transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
 }
 
-.site-header__nav .sub-menu a {
+// Third and deeper levels open beside their parent item rather than below it.
+.site-header__nav .sub-menu .sub-menu,
+.site-header__nav .children .children {
+    top: -10px;
+    left: calc(100% - 2px);
+    transform: translateX(-6px);
+}
+
+.site-header__nav .sub-menu a,
+.site-header__nav .children a {
     display: block;
     padding: 9px 10px;
     border-radius: 6px;
@@ -274,7 +287,9 @@ a {
 }
 
 .site-header__nav .sub-menu a:hover,
-.site-header__nav .sub-menu a:focus {
+.site-header__nav .sub-menu a:focus,
+.site-header__nav .children a:hover,
+.site-header__nav .children a:focus {
     background: rgba(37, 99, 235, .08);
 }
 
@@ -284,6 +299,24 @@ a {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+}
+
+.site-header__nav .page_item_has_children:hover > .children,
+.site-header__nav .page_item_has_children:focus-within > .children {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.site-header__nav .sub-menu .menu-item-has-children:hover > .sub-menu,
+.site-header__nav .sub-menu .menu-item-has-children:focus-within > .sub-menu {
+    transform: translateX(0);
+}
+
+.site-header__nav .children .page_item_has_children:hover > .children,
+.site-header__nav .children .page_item_has_children:focus-within > .children {
+    transform: translateX(0);
 }
 
 .mosaic-button {
@@ -982,7 +1015,8 @@ a {
         width: 100%;
     }
 
-    .site-header__nav .sub-menu {
+    .site-header__nav .sub-menu,
+    .site-header__nav .children {
         position: static;
         display: flex;
         visibility: visible;
@@ -997,6 +1031,15 @@ a {
         background: transparent;
         box-shadow: none;
         pointer-events: auto;
+        transform: none;
+    }
+
+    // Keep all submenu levels in the vertical mobile navigation.
+    .site-header__nav .sub-menu .sub-menu,
+    .site-header__nav .children .children {
+        position: static;
+        top: auto;
+        left: auto;
         transform: none;
     }
 
